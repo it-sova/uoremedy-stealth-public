@@ -77,7 +77,7 @@ while not Dead():
                 print("No more tools left")
                 exit()
 
-        # Select normal wood for crafting only once
+        # Select normal wood for crafting ( runs only once )
         if first_run == 1:
             UseType(TOOL_TYPE, 0x0000)
             wait_for_gump(7)

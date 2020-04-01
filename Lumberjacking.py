@@ -150,7 +150,7 @@ def find_suitable_chest():
             _chest_current_weight = _matches.group(1)
             _chest_maximum_weight = _matches.group(2)
             print(f"{_chest_current_weight}/{_chest_maximum_weight}")
-            if _chest_current_weight+MaxWeight() < _chest_maximum_weight:
+            if _chest_current_weight+Weight() < _chest_maximum_weight:
                 print("Using this chest to unload")
                 return _chest
 

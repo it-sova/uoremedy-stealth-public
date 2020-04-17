@@ -229,7 +229,7 @@ def cut_logs():
             Wait(1200)
 
 
-def craft_item(tool_category, tool_button, tool_type, item_type, required_qty):
+def craft_item(tool_category: int, tool_button: int, tool_type: int, item_type: int, required_qty: int) -> None:
     while Count(item_type) < required_qty:
         for _gump_counter in range(0, GetGumpsCount()):
             CloseSimpleGump(_gump_counter)
@@ -242,14 +242,14 @@ def craft_item(tool_category, tool_button, tool_type, item_type, required_qty):
             wait_for_gump(0)
 
 
-def find_gump(gump_id):
+def find_gump(gump_id: int) -> bool:
     for _gump in range(0, GetGumpsCount()):
         if GetGumpID(_gump) == gump_id:
             return True
     return False
 
 
-def wait_for_gump(button):
+def wait_for_gump(button: int) -> None:
     _try = 0
     while not find_gump(0x38920ABD):
         _try += 1

@@ -2,13 +2,13 @@ from py_stealth import *
 from Scripts.helpers import Types
 from datetime import datetime as dt
 
-LOCKPICK_CHEST = 0x4003EA52
-#
-CRAFT_TYPE = 0x14FC
-CRAFT_CATEGORY = 22
-CRAFT_BUTTON = 233
-CRAFT_TOOL_BUTTON = 128
 CRAFT_TOOL_CATEGORY = 22
+CRAFT_TOOL_BUTTON = 128
+TRASH_BARREL = 0x400AC053
+#
+CRAFT_TYPE = 0x108A
+CRAFT_CATEGORY = 8
+CRAFT_BUTTON = 2
 #
 
 
@@ -77,7 +77,12 @@ while not Dead():
         craft_item(CRAFT_CATEGORY, CRAFT_BUTTON, Types.TINKER_TOOLS, CRAFT_TYPE, 1)
         if FindType(CRAFT_TYPE, Backpack()):
             for _item in GetFindedList():
-                MoveItem(_item, 0, LOCKPICK_CHEST, 0, 0, 0)
+                MoveItem(_item, 0, TRASH_BARREL, 0, 0, 0)
+                # Lockpicks crafting
+                #if FindType(Types.LOCKPICK, Ground()):
+                #    MoveItem(_item, 0, FindItem(), 0, 0, 0)
+                #else:
+                #    DropHere(_item)
                 Wait(1000)
     Wait(100)
 

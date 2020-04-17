@@ -4,9 +4,9 @@ from datetime import datetime as dt
 
 TOOL_BOX = 0x400809AA
 #
-CRAFT_TYPE = 0x2798
-CRAFT_CATEGORY = 8
-CRAFT_BUTTON = 100
+CRAFT_TYPE = 0x175D
+CRAFT_CATEGORY = 22
+CRAFT_BUTTON = 93
 #
 
 
@@ -103,4 +103,11 @@ while not Dead():
                 UseType(Types.SCISSORS, 0x0000)
                 Wait(1000)
 
-
+        if FindType(Types.BANDAGE, Backpack()):
+            bandages = FindItem()
+            if FindType(Types.BANDAGE, Ground()):
+                MoveItem(bandages, 0, FindItem(), 0, 0, 0)
+                Wait(1000)
+            else:
+                DropHere(bandages)
+                Wait(1000)

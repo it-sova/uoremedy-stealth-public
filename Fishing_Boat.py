@@ -15,7 +15,17 @@ NEXT_TRY_MESSAGES = [
 ]
 
 FISH_TO_CUT = [
-    0x09CF, 0x09CD, 0x09CC, 0x09CE
+    0x09CF,  # a Fish
+    0x09CD,  # a Fish
+    0x09CC,  # a Fish
+    0x09CE,  # a Fish
+    0x4303,  # Yellow Perch
+    0x4307,  # Redbelly Bream
+    0x4306,  # Bluegill Sunfish
+    0x09CE,  # Uncommon Shiner
+    0x4302,  # Fluke Fish
+    0x44C6,  # Mahi Fish
+
 ]
 
 WATER_TILES = range(6038, 6044)
@@ -40,7 +50,7 @@ def cut():
 
 def check_poles():
     if FindType(Types.FISHING_POLE, Backpack()):
-        print(f"There is {FindQuantity()} poles left")
+        print(f"There is {FindCount()} poles left")
     else:
         print("No more poles left")
         exit()
@@ -62,6 +72,7 @@ def fishing():
         print(f"X = {_x} Y = {_y} Z = {GetZ(Self()) - 3}")
         while not Dead():
             cut()
+            check_poles()
             cancel_targets()
             _started = dt.now()
             UseType(Types.FISHING_POLE, 0xFFFF)

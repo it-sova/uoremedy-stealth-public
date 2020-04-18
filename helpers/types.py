@@ -10,3 +10,5 @@ class Types:
     SEWING_KIT = 0x0F9D
     SCISSORS = 0x0F9F
     LOCKPICK = 0x14FC
+    FISHING_POLE = 0x0DC0
+    DAGGER = 0x0F52

@@ -18,7 +18,8 @@ LOOT = [
     Types.BLACK_PEARL,
     Types.GOLD,
     Types.SULFUROUS_ASH,
-    0x0DCA  # Fishing net
+    0x0DCA,  # Fishing net
+    0x099F,  # Message in a Bottle
 ]
 
 BOOTS = [

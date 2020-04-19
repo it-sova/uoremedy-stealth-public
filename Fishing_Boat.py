@@ -144,7 +144,11 @@ def fishing():
         check_poles()
         _tile, _x, _y, _z = _tile_data
         print(f"X = {_x} Y = {_y} Z = {_z}")
-        while not Dead():
+        if InJournal("next_spot") > -1:
+            print("Rescanning tiles")
+            ClearJournal()
+            break
+        while not Dead() and InJournal("next_spot") == -1:
             cut()
             # Broken somewhat..
             # trash_boots()
@@ -164,7 +168,8 @@ def fishing():
 
                 if InJournalBetweenTimes("|".join(SKIP_TILE_MESSAGES), _started, dt.now()) > 0:
                     break
-
+            else:
+                break
             Wait(500)
 
         Wait(500)
@@ -172,3 +177,5 @@ def fishing():
 
 while not Dead():
     fishing()
+    Wait(500)
+

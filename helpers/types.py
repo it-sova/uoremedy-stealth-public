@@ -14,3 +14,6 @@ class Types:
     DAGGER = 0x0F52
     # Misc
     GOLD = 0x0EED
+    # Reagents
+    BLACK_PEARL = 0x0F7A
+    SULFUROUS_ASH = 0x0F8C

@@ -15,7 +15,9 @@ NEXT_TRY_MESSAGES = [
 ]
 
 LOOT = [
+    Types.BLACK_PEARL,
     Types.GOLD,
+    Types.SULFUROUS_ASH,
     0x0DCA  # Fishing net
 ]
 
@@ -27,10 +29,6 @@ BOOTS = [
 
 ENEMIES = [
     0x0096,  # Sea Serpent
-]
-
-MOVE_TO_CONTAINER = [
-    
 ]
 
 FISH_TO_CUT = [
@@ -98,22 +96,20 @@ def check_enemy():
             UOSay("[arm")
             Wait(100)
             while IsObjectExists(_enemy):
+                _started = dt.now()
                 Attack(_enemy)
 
                 if GetActiveAbility() != "Armor Ignore":
                     if Mana() > 30:
                         UsePrimaryAbility()
 
-                _try = 0
                 if HP() < MaxHP() - 10:
                     UOSay("[bandself")
                     Wait(500)
-                    while InJournal("You finish|not damaged|heal|barely help") < 0:
-                        _try += 1
-                        if _try > 20:
-                            print("Healing timeout")
-                            break
-                    ClearJournal()
+                    WaitJournalLine(_started, "You finish|not damaged|heal|barely help", 10000)
+
+                    if dt.now() >= _started+timedelta(seconds=10):
+                        print("Healing timeout exceeded")
 
                 Wait(500)
 
@@ -122,7 +118,7 @@ def check_enemy():
 
 def loot_corpse():
     if FindType(0x2006, Ground()):
-        print("Enemy")
+        print("Enemy dead")
         _corpse = FindItem()
         UseObject(_corpse)
         Wait(1000)
@@ -145,6 +141,7 @@ def find_tiles(center_x, center_y, radius):
 
 def fishing():
     for _tile_data in find_tiles(GetX(Self()), GetY(Self()), 4):
+        check_poles()
         _tile, _x, _y, _z = _tile_data
         print(f"X = {_x} Y = {_y} Z = {GetZ(Self()) - 3}")
         while not Dead():
@@ -153,7 +150,6 @@ def fishing():
             # trash_boots()
             #
             check_enemy()
-            check_poles()
             cancel_targets()
             _started = dt.now()
             UseType(Types.FISHING_POLE, 0xFFFF)

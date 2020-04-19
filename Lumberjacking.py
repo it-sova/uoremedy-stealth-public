@@ -294,16 +294,16 @@ def check_elemental():
                     if HP() < MaxHP() - 10:
                         UOSay("[bandself")
                         Wait(500)
-                        while InJournal("You finish|not damaged|heal|barely help") < 0:
+                        while InJournal("You finish|not damaged|heal|barely help") < 1:
                             _try += 1
-                            if _try > 20:
+                            if _try > 5:
                                 print("Healing timeout")
                                 break
                             # To get rid of error "MoveXYZ failed"
                             if IsObjectExists(_enemy):
                                 newMoveXY(GetX(_enemy), GetY(_enemy), True, 1, True)
 
-                            Wait(1000)
+                            Wait(500)
                         ClearJournal()
             else:
                 AddToSystemJournal(f"Character dead. Enemy name -> {GetName(_enemy)} X:{GetX(Self())} Y:{GetY(Self())}")

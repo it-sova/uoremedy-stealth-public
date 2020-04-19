@@ -143,7 +143,7 @@ def fishing():
     for _tile_data in find_tiles(GetX(Self()), GetY(Self()), 4):
         check_poles()
         _tile, _x, _y, _z = _tile_data
-        print(f"X = {_x} Y = {_y} Z = {GetZ(Self()) - 3}")
+        print(f"X = {_x} Y = {_y} Z = {_z}")
         while not Dead():
             cut()
             # Broken somewhat..
